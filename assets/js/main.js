@@ -411,7 +411,7 @@
     let quick = false;
     try { quick = sessionStorage.getItem("booted") === "1"; sessionStorage.setItem("booted", "1"); } catch (e) { /* ignore */ }
     const minTime = quick ? 500 : 1700;
-    const maxTime = 5000;
+    const maxTime = 3500;
     const arc = el.querySelector(".loader-ring-arc");
     const bar = el.querySelector(".loader-bar span");
     const pct = el.querySelector(".loader-pct b");
@@ -429,14 +429,18 @@
 
     return new Promise((resolve) => {
       const t0 = performance.now();
-      let shown = 0;
+      let shown = 0, last = t0, finished = false;
       const frame = (now) => {
+        if (finished) return;
         const elapsed = now - t0;
         const allDone = done === tasks.length || elapsed > maxTime;
         const cap = allDone ? 1 : 0.3 + 0.6 * (done / tasks.length);
         const target = Math.min(elapsed / minTime, cap) * 100;
-        shown += (target - shown) * 0.14;
+        // time-based easing, so a throttled or slow frame rate cannot stretch the loader
+        shown += (target - shown) * (1 - Math.exp(-(now - last) / 110));
+        last = now;
         if (allDone && elapsed >= minTime && shown > 99.3) shown = 100;
+        if (elapsed > maxTime + 600) shown = 100;
         arc.style.strokeDashoffset = String(100 - shown);
         bar.style.transform = `scaleX(${shown / 100})`;
         pct.textContent = String(Math.round(shown)).padStart(3, "0");
@@ -445,6 +449,8 @@
         finish();
       };
       const finish = async () => {
+        if (finished) return;
+        finished = true;
         await wait(quick ? 80 : 260);
         el.classList.add("is-done");
         await wait(320);
@@ -456,6 +462,7 @@
         root.classList.remove("loading", "intro");
       };
       requestAnimationFrame(frame);
+      setTimeout(finish, maxTime + 1200); // hard stop even if frames are paused
     });
   }
 
