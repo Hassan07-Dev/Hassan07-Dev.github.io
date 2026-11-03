@@ -41,8 +41,6 @@
   const TagItems = (list, max) =>
     list.slice(0, max).map((t) => `<li class="tag">${esc(t)}</li>`).join("") +
     (list.length > max ? `<li class="tag tag-more" title="${esc(list.slice(max).join(", "))}">+${list.length - max}</li>` : "");
-  // Older timeline roles show just their first sentence
-  const firstSentence = (text) => (text.match(/^.*?\.(\s|$)/) || [text])[0].trim();
 
   /* ---------- Project art: generated "browser mockup" used until real screenshots are added ---------- */
   function ProjectArt(p, variant = "card") {
@@ -322,13 +320,13 @@
   function ExperienceTimeline(items) {
     return `<ol class="timeline">${items
       .map(
-        (e, i) => `<li class="timeline-item reveal${e.end === "Present" ? " is-current" : ""}">
+        (e) => `<li class="timeline-item reveal${e.end === "Present" ? " is-current" : ""}">
           <article class="timeline-card">
             <p class="timeline-dates">${esc(e.start)} — ${esc(e.end)}</p>
             <h3 class="timeline-role">${esc(e.role)}</h3>
             <p class="timeline-company">${esc(e.company)} · ${esc(e.location)}${e.end === "Present" ? '<span class="current-badge">current</span>' : ""}</p>
-            <p>${esc(i < 2 ? e.description : firstSentence(e.description))}</p>
-            <ul class="tag-list" aria-label="Technologies used">${TagItems(e.tech, 6)}</ul>
+            <p>${esc(e.description)}</p>
+            <ul class="tag-list" aria-label="Technologies used">${TagItems(e.tech, e.tech.length)}</ul>
           </article>
         </li>`
       )
