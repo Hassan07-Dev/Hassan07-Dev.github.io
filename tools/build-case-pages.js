@@ -38,7 +38,7 @@ const page = (p) => `<!doctype html>
   <meta property="og:url" content="${site}/projects/${p.slug}.html">
   <meta property="og:image" content="${site}/${esc(p.image || D.site.photo)}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="../assets/img/favicon.svg?v=2" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
