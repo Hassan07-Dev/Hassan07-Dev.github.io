@@ -37,7 +37,7 @@
     mount("experience-content", `<div class="exp-layout"><div>${C.ExperienceTimeline(D.experience)}</div><aside class="exp-aside" aria-label="Education, certifications and recognition">${C.Credentials(D)}</aside></div>`);
     mount("contact-content", C.ContactCTA(D.site));
 
-    if (D.social.github) mount("opensource-content", C.OpenSource(D.social.github, D.openSource));
+    if (D.social.github && D.social.showOpenSource) mount("opensource-content", C.OpenSource(D.social.github, D.openSource));
     else hideSection("opensource");
 
     if (D.articles.length) mount("writing-content", C.Articles(D.articles));
@@ -46,7 +46,7 @@
     initTyping();
     initTerminal();
     initProjectFilters();
-    if (D.social.github) loadRepos(D.social.github);
+    if (D.social.github && D.social.showOpenSource) loadRepos(D.social.github);
     initContactForm();
   }
 

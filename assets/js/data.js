@@ -21,7 +21,8 @@ window.PORTFOLIO = {
   },
 
   social: {
-    github: "Hassan07-Dev", // also enables the Open Source section
+    github: "Hassan07-Dev", // GitHub icon links in the hero and footer
+    showOpenSource: false,  // true = show the GitHub section (contribution graph + live repos)
     linkedin: "https://www.linkedin.com/in/hassan26",
     twitter: "",         // e.g. "https://x.com/yourhandle"
   },
@@ -40,7 +41,7 @@ window.PORTFOLIO = {
     currentRole: "Senior Software Engineer & Team Lead",
     summary: [
       "I'm a back-end engineer with 6+ years building production systems in Laravel (PHP) and Python (Django, Flask, FastAPI). My work spans RegTech (KYC/AML), FinTech, HealthTech and multi-tenant SaaS.",
-      "At Programmers Force I lead the team behind a KYC and identity verification platform: I own the technical roadmap, run sprint planning and code reviews, and make architecture calls with product, QA and operations. I also ship Anthropic Claude API features to production, including tool use and agentic workflows.",
+      "At Programmers Force I lead the team behind a KYC and identity verification platform: I own the technical roadmap, run sprint planning and code reviews, and make architecture calls with product, QA and operations. I also ship Anthropic Claude API features to production, including agentic workflows.",
     ],
     funFact:
       "I started as a PHP intern in February 2020. Five years later I was leading the engineering team, and along the way I was named Programmers Force's “Force of the Month”.",
@@ -52,10 +53,10 @@ window.PORTFOLIO = {
     ],
     // Rendered as the stacked “tech stack” visual in the About section.
     stackLayers: [
-      { layer: "AI", items: ["Claude API", "Tool use", "Agentic workflows"] },
+      { layer: "AI", items: ["Claude API", "Claude Code", "Cursor", "Agentic workflows"] },
       { layer: "Back end", items: ["Laravel", "Django", "Flask", "FastAPI", "Node.js"] },
       { layer: "Data", items: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "DynamoDB"] },
-      { layer: "Infra", items: ["AWS EC2", "Docker", "Nginx", "CI/CD"] },
+      { layer: "Infra", items: ["AWS EC2", "Docker", "Web server", "CI/CD"] },
     ],
   },
 
@@ -101,7 +102,15 @@ window.PORTFOLIO = {
         { name: "Prompt Engineering", icon: null, badge: "›_" },
         { name: "AI Workflow Automation", icon: null, badge: "↻" },
         { name: "LLM-powered Features", icon: null, badge: "✦" },
-        { name: "Tool Use / Function Calling", icon: null, badge: "fn" },
+      ],
+    },
+    {
+      category: "AI tools",
+      items: [
+        { name: "Claude Code", icon: null, badge: "✳" },
+        { name: "Cursor", icon: null, badge: "⌘" },
+        { name: "Antigravity", icon: null, badge: "↟" },
+        // add more here, e.g. { name: "GitHub Copilot", icon: null, badge: "Co" },
       ],
     },
     {
@@ -118,7 +127,7 @@ window.PORTFOLIO = {
       category: "DevOps & tools",
       items: [
         { name: "Docker", icon: "docker/docker-original" },
-        { name: "Nginx", icon: "nginx/nginx-original" },
+        { name: "Web Server", icon: null, badge: "www" },
         { name: "Ubuntu / Linux", icon: "ubuntu/ubuntu-original" },
         { name: "Git", icon: "git/git-original" },
         { name: "Git Flow", icon: null, badge: "⎇" },
@@ -227,7 +236,7 @@ window.PORTFOLIO = {
           note: "Simplified view. Internal details are omitted.",
           steps: [
             { label: "Client / SDK", sub: "Verification request" },
-            { label: "Nginx edge", sub: "Routing & TLS" },
+            { label: "Web server", sub: "Routing & TLS" },
             { label: "API services", sub: "Laravel · Python" },
             { label: "Rule engine", sub: "Per-flow checks" },
             { label: "Parallel checks", sub: "Third-party providers" },
@@ -238,7 +247,7 @@ window.PORTFOLIO = {
         highlights: [
           "Led the migration of the multi-server platform to a decentralized architecture",
           "Hardened real-time KYC stream processing against injection attacks and closed critical security gaps",
-          "Integrated Anthropic's Claude API into production: LLM features, tool use and agentic workflows",
+          "Integrated Anthropic's Claude API into production: LLM features and agentic workflows",
           "Cut per-verification processing time by 60% with rule engines and parallel API calls",
         ],
         metrics: [
@@ -439,7 +448,7 @@ window.PORTFOLIO = {
   moreProjects: [
     { title: "Facie.ai", org: "Programmers Force", description: "Built this consumer AI photo app.", url: "https://facie.ai" },
     { title: "AML Watcher", org: "Programmers Force", description: "AI anti-money-laundering compliance platform: sanctions, PEP and adverse media screening.", url: "https://amlwatcher.com" },
-    { title: "Claude API & agentic workflows", org: "Programmers Force", description: "Production LLM features with tool use and multi-step agent flows.", url: "" },
+    { title: "Claude API & agentic workflows", org: "Programmers Force", description: "Production LLM features and multi-step agent flows.", url: "" },
     { title: "Meal Minion", org: "Tech Andaz", description: "Modules for an all-in-one restaurant SaaS: POS, inventory, online ordering, payroll and accounting.", url: "https://mealminion.com" },
     { title: "Digital IMNCI", org: "Tech Andaz", description: "Contributed to this digital health project.", url: "https://imnci.phcglobal.org" },
   ],
@@ -453,7 +462,7 @@ window.PORTFOLIO = {
       location: "Lahore, Pakistan",
       description:
         "Lead a team of 5 engineers on a KYC and identity verification platform serving 1M+ monthly users in 150+ countries at 1M+ requests/day. Own the roadmap and delivery; led the move to a decentralized architecture supporting a 99.9% uptime SLA; hardened real-time stream processing; ship Claude API features to production.",
-      tech: ["Laravel", "Python", "Node.js", "Vue.js", "React", "AWS", "Docker", "Nginx", "PostgreSQL", "MongoDB", "Redis", "Claude API"],
+      tech: ["Laravel", "Python", "Node.js", "Vue.js", "React", "AWS", "Docker", "Web Server", "PostgreSQL", "MongoDB", "Redis", "Claude API"],
     },
     {
       company: "Programmers Force",

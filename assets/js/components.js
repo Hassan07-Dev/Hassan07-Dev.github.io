@@ -37,6 +37,13 @@
 
   const DEVICON = "https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/";
 
+  // First `max` tags, then a "+N" chip for the rest (keeps cards short)
+  const TagItems = (list, max) =>
+    list.slice(0, max).map((t) => `<li class="tag">${esc(t)}</li>`).join("") +
+    (list.length > max ? `<li class="tag tag-more" title="${esc(list.slice(max).join(", "))}">+${list.length - max}</li>` : "");
+  // Older timeline roles show just their first sentence
+  const firstSentence = (text) => (text.match(/^.*?\.(\s|$)/) || [text])[0].trim();
+
   /* ---------- Project art: generated "browser mockup" used until real screenshots are added ---------- */
   function ProjectArt(p, variant = "card") {
     const a = p.accent || "#EF5350";
@@ -179,7 +186,7 @@
             <h3 class="project-title"><a href="${caseHref}">${esc(p.title)}</a></h3>
             <p class="project-desc">${esc(p.summary)}</p>
             <p class="project-outcome">${icon("trend")}<span>${esc(p.outcome)}</span></p>
-            <ul class="tag-list" aria-label="Tech stack">${p.tags.map((t) => `<li class="tag">${esc(t)}</li>`).join("")}</ul>
+            <ul class="tag-list" aria-label="Tech stack">${TagItems(p.tags, 5)}</ul>
             <div class="project-links">${links}</div>
           </div>
         </article>
@@ -315,13 +322,13 @@
   function ExperienceTimeline(items) {
     return `<ol class="timeline">${items
       .map(
-        (e) => `<li class="timeline-item reveal${e.end === "Present" ? " is-current" : ""}">
+        (e, i) => `<li class="timeline-item reveal${e.end === "Present" ? " is-current" : ""}">
           <article class="timeline-card">
             <p class="timeline-dates">${esc(e.start)} — ${esc(e.end)}</p>
             <h3 class="timeline-role">${esc(e.role)}</h3>
             <p class="timeline-company">${esc(e.company)} · ${esc(e.location)}${e.end === "Present" ? '<span class="current-badge">current</span>' : ""}</p>
-            <p>${esc(e.description)}</p>
-            <ul class="tag-list" aria-label="Technologies used">${e.tech.map((t) => `<li class="tag">${esc(t)}</li>`).join("")}</ul>
+            <p>${esc(i < 2 ? e.description : firstSentence(e.description))}</p>
+            <ul class="tag-list" aria-label="Technologies used">${TagItems(e.tech, 6)}</ul>
           </article>
         </li>`
       )
