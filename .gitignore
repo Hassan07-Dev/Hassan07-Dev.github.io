@@ -1,0 +1,8 @@
+# local editor / preview config
+.claude/
+
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
